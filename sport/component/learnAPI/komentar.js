@@ -31,11 +31,16 @@ const Komentar = () => {
 
   const deleteCommento = async (commentId) => {
     try {
+      //   const data = await response.json(); //convert to json
+      //   console.log(data);
       const response = await fetch(`/api/learnapi/${commentId}`, {
         method: "DELETE",
+      }).then((response) => {
+        return response.json;
       });
-      const data = await response.json(); //convert to json
-      console.log(data);
+
+      console.log(response);
+
       fetchCommento(); //show after deleted
     } catch (e) {
       console.error(e, "delete commento");
@@ -52,7 +57,7 @@ const Komentar = () => {
             <h1>
               {comment.id}
               {comment.text}
-              {/* <button onClick={() => deleteCommento(comment.id)}>Delete</button> */}
+              <button onClick={() => deleteCommento(comment.id)}>Delete</button>
             </h1>
           </div>
         );
